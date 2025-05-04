@@ -38,14 +38,19 @@ function addRating(col, value) {
 
 */
 
-function addRating(col, value) {
-
+function addRating() {
+	
+	let col = document.querySelector('#rate-select').selectedOptions[0].value;
+	let value = document.querySelector('#rating').value;
 	const cell = columnNumberToLetter(col) + currentSheetsRow;  // "C5"
 
-fetch(`https://script.google.com/macros/s/AKfycbwqS5_IxUlJyIh8wOSrhMMk46iomIEjwfU0f_jFkopdWIUqpc474yGQ8eAwpIa0Spk5/exec?range=${cell}&value=${value}`)
-  .then(response => response.json())
-  .then(data => console.log("Success:", data))
-  .catch(error => console.error("Error:", error));
+	fetch(`https://script.google.com/macros/s/AKfycbw7uaPPVxjsS5qayW-WpkpC6Jk04SR_h1MNixY7EhHit3lUdi9NwVRsCbykU3_YrxM0/exec?range=${cell}&value=${value}`)
+		.then(response => response.json())
+		.then(data => {
+			console.log("Success:", data);
+			document.querySelector('div[data-col="'+col+'"] p').innerText = value;
+		})
+		.catch(error => console.error("Error:", error));
 } 
 
 
@@ -61,15 +66,30 @@ function showRatingsForWeapon() {
 	}
 	
 	let row = sheetsData.find(function(row) { return row[0] == currentWeaponName })
-	currentSheetsRow = sheetsData.indexOf(row);
+	currentSheetsRow = sheetsData.indexOf(row) + 1;
 	users.forEach(function(user, index) {
 		document.querySelector('.ratings').innerHTML += `
-		<div class="rating">
+		<div data-col="${index+2}" class="rating">
 			<h3>${user}</h3>
 			<p>${!row[index+1] ? 'N/A' : row[index+1]}</p>
 		</div>
 		`; 
 	});	
+	
+	document.querySelector('.ratings').innerHTML += `
+		<div class="rate">
+			<select id="rate-select"></select>
+			<input id="rating" type="number" max="10" min="0" />
+			<button onclick="addRating()">Rate</button>
+		</div>
+	`;
+	
+	users.forEach(function(user, index) {
+		document.querySelector('#rate-select').innerHTML += `
+			<option value="${index+2}">${user}</option>
+		`;
+	});
+	
 }
 
 function columnNumberToLetter(columnNumber) {
