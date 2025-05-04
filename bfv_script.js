@@ -183,14 +183,16 @@ function showWeapon(index) {
 			attachments.innerHTML += `<tr data-row="${index}"><td><button ${index != 0 ? 'disabled' : ''} data-button="a" onclick="showWeaponWithAttachments(this)" data-attachment="${row.a}">${customizationStrings[row.a]}</button></td><td><button ${index != 0 ? 'disabled' : ''} data-button="b"  onclick="showWeaponWithAttachments(this)" data-attachment="${row.b}">${customizationStrings[row.b]}</button></td></tr>`;
 		});
 	}
+	
+	document.getElementById('weapon-name').innerText = currentWeaponName;
 
     // Update general stats table
     const statsTable = document.getElementById('generalStats');
     statsTable.innerHTML = `
         <tr><th>Stat</th><th>Value</th></tr>
         <tr><td>Weapon Name</td><td>${weapon.WeapShowName}</td></tr>
-        <tr><td>SDmg</td><td>${weapon.SDmg}</td></tr>
-        <tr><td>EDmg</td><td>${weapon.EDmg}</td></tr>
+        <tr><td>Max damage</td><td>${weapon.SDmg}</td></tr>
+        <tr><td>Min damage</td><td>${weapon.EDmg}</td></tr>
         <tr><td>Time To Live</td><td>${weapon.TimeToLive}</td></tr>
         <tr><td>Initial Speed</td><td>${weapon.InitialSpeed}</td></tr>
         <tr><td>Deploy Time</td><td>${weapon.DeployTime}</td></tr>
