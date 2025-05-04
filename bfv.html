@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <title>Weapon Stats Viewer</title>
+  <style>
+        body {
+      display: flex;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    #sidebar {
+      width: 250px;
+      background-color: #f0f0f0;
+      padding: 1em;
+      overflow-y: auto;
+      height: 100vh;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+    #sidebar h2 {
+      margin-top: 0;
+    }
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    #sidebar li {
+      cursor: pointer;
+      padding: 0.5em;
+      margin-bottom: 0.2em;
+      border-radius: 4px;
+    }
+    #sidebar li:hover {
+      background-color: #ddd;
+    }
+    #content {
+      flex: 1;
+      padding: 2em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2em;
+    }
+    th, td {
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #eee;
+    }
+	.weapon-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.chart-container {
+		width: 100%;
+		max-width: 500px;
+		margin-bottom: 30px;
+	}
+
+	.stats-container {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.stats-table {
+		width: 100%;
+		max-width: 320px;
+		min-width: 320px;
+	}
+	
+	.container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+	}
+
+	.stats-container:last-child {
+		width: 100%;
+		gap: 20px;
+	}
+	
+	.active {
+		background: red;
+	}
+	
+	.attachments-container {
+		width: 300px;
+	}
+
+	.attachments-container button {
+		width: 100%;
+	}
+	
+	.ratings {
+		display: flex;
+		gap: 20px;
+		padding: 20px;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+		background: #eee;
+		width: fit-content;
+	}
+
+	.rating h3 {
+		margin: 0;
+	}
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <h2>Weapons</h2>
+    <ul id="weaponList"></ul>
+  </div>
+  <div id="content">
+	<div class="ratings">
+		
+	</div>
+    <div class="container">
+		<div class="attachments-container">
+			<table>
+				<h3>Attachments</h3>
+                <table id="attachmentsButtons">
+                    <!-- Dynamic content will be added here -->
+                </table>
+			</table>
+		</div>
+		<div class="stats-container">
+			<!-- General Stats Table -->
+            <div class="stats-table">
+                <h3>General Stats</h3>
+                <table id="generalStats">
+                    <!-- Dynamic content will be added here -->
+                </table>
+            </div>
+		</div>
+        <div class="chart-container">
+			<h3>Damage chart</h3>
+            <canvas id="damageChart"></canvas>
+        </div>
+        <div class="stats-container">
+            
+
+            <!-- Recoil Stats Table -->
+            <div class="stats-table">
+                <h3>Recoil Stats</h3>
+                <table id="recoilStats">
+                    <!-- Dynamic content will be added here -->
+                </table>
+            </div>
+
+            <!-- Spread Stats Table -->
+            <div class="stats-table">
+                <h3>Spread Stats</h3>
+                <table id="spreadStats">
+                    <!-- Dynamic content will be added here -->
+                </table>
+            </div>
+
+            <!-- Reload Stats Table -->
+            <div class="stats-table">
+                <h3>Reload Stats</h3>
+                <table id="reloadStats">
+                    <!-- Dynamic content will be added here -->
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <script src="bfv_data.js"></script>
+  <script src="rating.js"></script>
+  <script src="bfv_script.js"></script>
+</body>
+</html>
