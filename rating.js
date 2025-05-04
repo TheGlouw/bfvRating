@@ -42,7 +42,7 @@ function addRating(col, value) {
 
 	const cell = columnNumberToLetter(col) + currentSheetsRow;  // "C5"
 
-fetch(`https://script.google.com/macros/s/AKfycbxRtCqLQM9Pg05xROG8mVjEiiUXvBVuy4QSHQ2J04Nvf9nso2EneUDbGn8Hyy2G78mG/exec?range=${cell}&value=${value}`)
+fetch(`https://script.google.com/macros/s/AKfycbwqS5_IxUlJyIh8wOSrhMMk46iomIEjwfU0f_jFkopdWIUqpc474yGQ8eAwpIa0Spk5/exec?range=${cell}&value=${value}`)
   .then(response => response.json())
   .then(data => console.log("Success:", data))
   .catch(error => console.error("Error:", error));
