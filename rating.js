@@ -42,12 +42,10 @@ function addRating(col, value) {
 
 	const cell = columnNumberToLetter(col) + currentSheetsRow;  // "C5"
 
-fetch(`https://script.google.com/macros/s/AKfycbwMkjhigk_UeOz6T8xG6iY5mncs_X92SGdMPrJULUUsCjo3sqwjiSaf8V5rRKFblWOZ/exec?range=${cell}&value=${value}`, { crossDomain:true, method: 'GET', headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      } })
-  .then(response => response.text())
-  .then(result => console.log("Submitted: " + result))
-  .catch(error => console.log("Error: " + error));
+fetch(`https://script.google.com/macros/s/AKfycbwMkjhigk_UeOz6T8xG6iY5mncs_X92SGdMPrJULUUsCjo3sqwjiSaf8V5rRKFblWOZ/exec?range=${cell}&value=${value}`)
+  .then(response => response.json())
+  .then(data => console.log("Success:", data))
+  .catch(error => console.error("Error:", error));
 } 
 
 
