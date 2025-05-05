@@ -41,7 +41,7 @@ function addRating(col, value) {
 function addRating() {
 	
 	let col = document.querySelector('#rate-select').selectedOptions[0].value;
-	let value = document.querySelector('#rating').value;
+	let value = document.querySelector('#rating').selectedOptions[0].value;
 	const cell = columnNumberToLetter(col) + currentSheetsRow;  // "C5"
 
 	fetch(`https://script.google.com/macros/s/AKfycbw7uaPPVxjsS5qayW-WpkpC6Jk04SR_h1MNixY7EhHit3lUdi9NwVRsCbykU3_YrxM0/exec?range=${cell}&value=${value}`)
@@ -79,7 +79,30 @@ function showRatingsForWeapon() {
 	document.querySelector('.ratings').innerHTML += `
 		<div class="rate">
 			<select id="rate-select"></select>
-			<input id="rating" type="number" max="10" min="0" step="0.5" />
+			<select id="rating">
+				<option value="10">10</option>
+				<option value="9.5">9.5</option>
+				<option value="9">9</option>
+				<option value="8.5">8.5</option>
+				<option value="8">8</option>
+				<option value="7.5">7.5</option>
+				<option value="7">7</option>
+				<option value="6.5">6.5</option>
+				<option value="6">6</option>
+				<option value="5.5">5.5</option>
+				<option value="5">5</option>
+				<option value="4.5">4.5</option>
+				<option value="4">4</option>
+				<option value="3.5">3.5</option>
+				<option value="3">3</option>
+				<option value="2.5">2.5</option>
+				<option value="2">2</option>
+				<option value="1.5">1.5</option>
+				<option value="1">1</option>
+				<option value="0.5">0.5</option>
+				<option value="0">0</option>
+				
+			</select>
 			<button onclick="addRating()">Rate</button>
 		</div>
 	`;
