@@ -79,7 +79,7 @@ function showRatingsForWeapon() {
 	document.querySelector('.ratings').innerHTML += `
 		<div class="rate">
 			<select id="rate-select"></select>
-			<input id="rating" type="number" max="10" min="0" />
+			<input id="rating" type="number" max="10" min="0" step="0.5" />
 			<button onclick="addRating()">Rate</button>
 		</div>
 	`;
