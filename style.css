@@ -100,15 +100,40 @@ th {
 	background: #eee;
 	width: 100%;
 	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+.rating {
+	display: none;
+    flex-direction: column;
+    align-items: center;
 }
 
 .rating h3 {
 	margin: 0;
 }
 
+.rating p {
+    font-size: 30px;
+    margin: 10px 0px;
+    font-weight: bold;
+}
+
 .rate {
-	display: flex;
+	display: none;
 	flex-direction: column;
+    align-items: center;
+}
+
+.rate button {
+    width: 60px;
+}
+
+#rating {
+    width: 60px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: 2px 0;
 }
 
 .left {
@@ -124,4 +149,12 @@ th {
 
 * {
 	box-sizing: border-box;
+}
+
+.show {
+	display: flex;
+}
+
+.hide {
+	display: none;
 }
