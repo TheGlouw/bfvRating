@@ -1,5 +1,7 @@
 let sheetsData = null;
 let currentSheetsRow = null;
+let users = [];
+let userSelected = null;
 
 const spreadsheetId = '135tC-PD5oIkA8KR56DH2rplX4c8D1RkGlGZ3vuL0SCg';
 const apiKey = 'AIzaSyActnq1wj0Fxvm8CqslovO4AfBDadbjykk';
@@ -48,17 +50,22 @@ function addRating() {
 		.then(response => response.json())
 		.then(data => {
 			console.log("Success:", data);
+			sheetsData[currentSheetsRow-1][Number(col-1)] = value;
 			document.querySelector('div[data-col="'+col+'"] p').innerText = value;
 		})
 		.catch(error => console.error("Error:", error));
 } 
 
-
+function selectUser() {
+	userSelected = document.querySelector('#rate-select').selectedOptions[0].value;
+	document.querySelector('div[data-col="'+document.querySelector('#rate-select').selectedOptions[0].value+'"]').classList.add('show');
+	document.querySelector('.rate').classList.add('show');
+	document.querySelector('.select-user').classList.add('hide');
+}
 
 function showRatingsForWeapon() {
 	if(!sheetsData)
 		return;
-	let users = [];
 	document.querySelector('.ratings').innerHTML = '';
 	
 	for(let i = 1; i < sheetsData[0].length; i++) {
@@ -77,8 +84,12 @@ function showRatingsForWeapon() {
 	});	
 	
 	document.querySelector('.ratings').innerHTML += `
-		<div class="rate">
+		<div class="select-user">
+			<h3>Select user</h3>
 			<select id="rate-select"></select>
+			<button onclick="selectUser()">Select</button>
+		</div>
+		<div class="rate">
 			<select id="rating">
 				<option value="10">10</option>
 				<option value="9.5">9.5</option>
@@ -112,6 +123,11 @@ function showRatingsForWeapon() {
 			<option value="${index+2}">${user}</option>
 		`;
 	});
+	
+	if(userSelected) {
+		document.querySelector('#rate-select').selectedOptions[0].value = userSelected
+		selectUser();
+	}
 	
 }
 
